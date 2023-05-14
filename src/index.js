@@ -62,3 +62,6 @@ useCurrentLocation.addEventListener('click', async () => {
 });
 
 timezoneInput.addEventListener("change", () => timezoneInput.setCustomValidity(""));
+
+if ("serviceWorker" in navigator)
+  navigator.serviceWorker.register("./service-worker.js");
