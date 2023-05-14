@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunrise-Sunset Calendar</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+  <style>
+    @media (min-width: 769px) {
+      #location-form > div {
+        display: flex;
+        gap: 1rem;
+      }
+    }
+    #location-form > div {
+      margin-bottom: 1rem;
+    }
+    #location-form > div > div {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sunrise-Sunset Calendar</h1>
+  <hr>
+  <p>Generate an iCal file for sunrise and sunset times for a given location.</p>
+  <form id="location-form">
+    <div>
+      <div>
+        <label for="latitude">Latitude</label>
+        <input type="number" step="any" name="latitude" id="latitude" placeholder="e.g. 51.5074" required>
+      </div>
+      <div>
+        <label for="longitude">Longitude</label>
+        <input type="number" step="any" name="longitude" id="longitude" placeholder="e.g. 0.1278" required>
+      </div>
+      <div>
+        <label for="timezone">Timezone</label>
+        <input type="text" name="timezone" id="timezone" placeholder="e.g. Europe/London or BST" required>
+        <small>Note: Valid timezones vary across platforms. For instance, "BST" doesn't work on Firefox but "Europe/London" does.</small>
+      </div>
+    </div>
+    <button type="button" id="use-current-location">Use Current Location/TZ Offset</button>
+    <hr>
+    <button type="submit">Generate iCal</button>
+  </form>
+  <noscript>
+    <p>JavaScript is required to use this tool.</p>
+  </noscript>
+  <script type="module" src="./index.js"></script>
+</body>
+</html>
