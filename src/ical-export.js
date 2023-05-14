@@ -16,7 +16,7 @@ export class IcalBuilder {
     const utcTimestamp = timestamp.toUTC();
     const dateString = utcTimestamp.toFormat("yyyyMMdd'T'HHmmss'Z'");
     const dstampString = dstampTime.toUTC().toFormat("yyyyMMdd'T'HHmmss'Z'");
-    const uid = crypto.randomUUID();
+    const uid = `${btoa(dateString)}@sunrise-sunset-calendar.grimsteel.github.io`;
 
     return `BEGIN:VEVENT
 DTSTART:${dateString}
