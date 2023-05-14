@@ -1,3 +1,8 @@
+import { getSunriseSunset } from "./sunrise-sunset.js";
+import { DateTime } from "https://cdn.jsdelivr.net/npm/luxon@3.3.0/+esm";
+import { IcalBuilder } from "./ical-export.js";
+import { saveFile } from "./file-saver.js";
+
 const locationForm = document.querySelector('#location-form');
 const latitudeInput = document.querySelector('#latitude');
 const longitudeInput = document.querySelector('#longitude');
@@ -27,7 +32,7 @@ function getCurrentTimezone() {
   return Intl.DateTimeFormat().resolvedOptions().timeZone;
 }
 
-locationForm.addEventListener('submit', (e) => {
+locationForm.addEventListener('submit', async e => {
   e.preventDefault();
   const isValidTimezone = validateTimezone(timezoneInput.value);
   if (!isValidTimezone) {
@@ -35,6 +40,18 @@ locationForm.addEventListener('submit', (e) => {
     timezoneInput.reportValidity();
     return;
   }
+  const currentDate = DateTime.local({ zone: timezoneInput.value }).startOf('day');
+  const dstampTime = DateTime.now();
+  const icalBuilder = new IcalBuilder();
+
+  for (let i = 0; i < 365; i++) {
+    const { sunrise, sunset } = getSunriseSunset(currentDate.plus({ days: i }), latitudeInput.value, longitudeInput.value);
+    icalBuilder.addEvent({ timestamp: sunrise, summary: 'Sunrise' }, dstampTime);
+    icalBuilder.addEvent({ timestamp: sunset, summary: 'Sunset' }, dstampTime);
+  }
+  
+  const icalString = icalBuilder.build();
+  await saveFile('sunrise-sunset.ics', icalString);
 });
 
 useCurrentLocation.addEventListener('click', async () => {

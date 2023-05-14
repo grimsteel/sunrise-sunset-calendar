@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sunrise-Sunset Calendar</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+  <link rel="icon" href="./favicon.ico">
   <style>
     @media (min-width: 769px) {
       #location-form > div {
@@ -39,13 +40,26 @@
       </div>
       <div>
         <label for="timezone">Timezone</label>
-        <input type="text" name="timezone" id="timezone" placeholder="e.g. Europe/London or BST" required>
-        <small>Note: Valid timezones vary across platforms. For instance, "BST" doesn't work on Firefox but "Europe/London" does.</small>
+        <input type="text" name="timezone" id="timezone" placeholder="e.g. Europe/London" required>
+        <small>Note: For best results, use the canonical timezone identifier: <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank">Wikipedia</a>.</small>
       </div>
     </div>
-    <button type="button" id="use-current-location">Use Current Location/TZ Offset</button>
+    <button type="button" id="use-current-location">Use Current Location/TZ</button>
     <hr>
     <button type="submit">Generate iCal</button>
+    <br>
+    <small>This will generate an iCal file with 365 days of sunrise/sunset data.</small>
+    <hr>
+    <h3>How do I get this into Google Calendar?</h3>
+    <p>Once you have your iCal file, follow these steps:</p>
+    <ol>
+      <li>Create a new calendar to hold the data<br><small><kbd>Other calendars > + > Create new calendar</kbd></small></li>
+      <li>Navigate to the Import/Export screen<br><small><kbd>Other calendars > + > Import</kbd></small></li>
+      <li>Select the iCal file</li>
+      <li>Choose the calendar you created earlier</li>
+      <li>Click <kbd>Import</kbd></li>
+    </ol>
+    <p>The import process may take a while. If everything was successful, you should be informed that 730 events were imported! (365 days with an event for sunrise and sunset each day)</p>
   </form>
   <noscript>
     <p>JavaScript is required to use this tool.</p>
