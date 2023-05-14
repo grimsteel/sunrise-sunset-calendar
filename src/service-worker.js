@@ -1,4 +1,4 @@
-const cacheName = "sunrise-sunset-calendar-v1.1";
+const cacheName = "sunrise-sunset-calendar-v1.2";
 
 const urlsToCache = [
   ".",
